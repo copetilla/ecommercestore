@@ -26,7 +26,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
                 <div className='px-4 sm:px-6 lg:px-8 pb-24'>
                     <div className='lg:grid lg:grid-cols-5 lg:gap-x-8'>
                         {/* mobile */}
-                        <MobileFilters />
+                        <MobileFilters data={[{ id: '1', name: 'Tamaño' }, { id: '2', name: 'Grande' }]} valueKey='llaveId' name='Size' />
                         <div className='hidden lg:block'>
                             <Filter
                                 valueKey='llaveId'

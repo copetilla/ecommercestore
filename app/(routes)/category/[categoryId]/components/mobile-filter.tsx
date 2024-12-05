@@ -44,9 +44,9 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({ data, name, valueKey }) =
 
                         <div className='p-4'>
                             <Filter
-                                valueKey='llaveId'
-                                name='llaves'
-                                data={[{ id: '1', name: 'Tamano' }, { id: '2', name: 'Grande' }]}
+                                valueKey={valueKey}
+                                name={name}
+                                data={data}
                             />
                         </div>
 
