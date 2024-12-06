@@ -26,9 +26,11 @@ export default function RootLayout({
       >
         <ModalProvider />
         <ToastProvider />
-        <Navbar />
-        {children}
-        <Footer />
+        <div className="grid min-h-dvh grid-rows-[auto_1fr_auto]">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
