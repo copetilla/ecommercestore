@@ -28,7 +28,7 @@ const PayPage = () => {
                         Finalizar compra
                     </h1>
                     <div className='lg:mt-12 mt-8 lg:grid lg:grid-cols-12 lg:items-start gap-x-12'>
-                        <PayForm />
+                        <PayForm items={cart.items} />
                         <Summary />
                     </div>
                 </div>

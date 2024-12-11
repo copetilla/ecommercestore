@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 import { useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import toast from 'react-hot-toast'
 
 import Button from '@/components/ui/button'
@@ -10,12 +10,14 @@ import Currency from '@/components/ui/currency'
 
 import useCart from '@/hooks/use-cart'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 const Sumary = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const items = useCart((state) => state.items)
     const removeAll = useCart((state) => state.removeAll)
+    const pathname = usePathname();
 
     useEffect(() => {
         if (searchParams.get('success')) {
@@ -29,32 +31,19 @@ const Sumary = () => {
     }, [])
 
     const totalPrice = items.reduce((total, item) => {
-        return total + Number(item.price)
-    }, 0)
+        return total + Number(item.price) * item.quantity;
+    }, 0);
 
-    // const onCheckout = async () => {
-    //     try {
-    //         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json', // Clave pública de Supabase
-    //             },
-    //             body: JSON.stringify(orderData)
-    //         });
 
-    //         if (!response.ok) {
-    //             throw new Error('Error al crear la orden');
-    //         }
+    const pushButton = () => {
+        if (pathname === '/cart' && items.length > 0) {
+            router.push('/pay')
+        }
+    }
 
-    //         const data = await response.json();
-    //         console.log('Orden creada:', data);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
     return (
         <div
-            className='mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'
+            className='lg:sticky top-10 mt-16 lg:shadow-lg rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'
         >
             <h2 className='text-lg font-medium text-gray-900'>
                 Resumen del pedido
@@ -67,8 +56,10 @@ const Sumary = () => {
                     <Currency value={totalPrice} />
                 </div>
             </div>
-            <Button onClick={() => router.push('/pay')} className='w-full mt-6'>
-                Finalizar compra
+            <Button onClick={pushButton} className={cn(
+                'w-full mt-6',
+                pathname !== '/cart' && 'hidden')}>
+                Ir a pago
             </Button>
         </div>
     )

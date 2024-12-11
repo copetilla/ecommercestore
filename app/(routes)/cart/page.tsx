@@ -5,6 +5,7 @@ import useCart from '@/hooks/use-cart'
 import React, { useEffect, useState } from 'react'
 import CartItem from './components/cart-item'
 import Summary from './components/summary'
+import Button from '@/components/ui/button'
 
 const CartPage = () => {
     const [isMounted, setIsMounted] = useState(false)
@@ -18,7 +19,6 @@ const CartPage = () => {
     if (!isMounted) {
         return null
     }
-
 
     return (
         <div className='bg-white'>
@@ -40,6 +40,7 @@ const CartPage = () => {
                             </ul>
                         </div>
                         <Summary />
+
                     </div>
                 </div>
             </Container>

@@ -16,6 +16,8 @@ const NavbarActions = () => {
 
     const router = useRouter()
     const cart = useCart();
+    const totalItems = useCart((state) => state.getTotalQuantity());
+
 
     if (!isMounted) {
         return null
@@ -29,7 +31,7 @@ const NavbarActions = () => {
                     color='white'
                 />
                 <span className='ml-2 text-sm font-medium text-white'>
-                    {cart.items.length}
+                    {totalItems}
                 </span>
             </Button>
         </div>

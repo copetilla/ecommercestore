@@ -1,8 +1,7 @@
 import React from 'react'
 
 import Image from 'next/image'
-import { X } from 'lucide-react'
-import toast from 'react-hot-toast'
+import { Minus, Plus, X } from 'lucide-react'
 
 import IconButton from '@/components/ui/icon-button'
 import Currency from '@/components/ui/currency'
@@ -11,14 +10,14 @@ import useCart from '@/hooks/use-cart'
 import { Product } from '@/types'
 
 interface CartItemProps {
-    data: Product;
+    data: Product & { quantity: number };
 }
 
 const CartItem: React.FC<CartItemProps> = ({ data }) => {
     const cart = useCart();
 
     const onRemove = () => {
-        cart.removeItem(data.id)
+        cart.removeItems(data.id)
     }
     return (
         <li className='flex py-6 border-b '>
@@ -34,19 +33,26 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
                 <div className='absolute z-10 right-0 top-0'>
                     <IconButton onClick={onRemove} icon={<X size={15} />} />
                 </div>
-                <div className='relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0'>
-                    <div className='flex justify-between'>
+                <div className='relative flex justify-between pr-9 sm:grid sm:grid-cols-2 gap-x-4 sm:gap-x-6 mr-5 sm:pr-0'>
+                    <div className='flex flex-col justify-between'>
                         <p className='text-lg font-semibold text-black'>
                             {data.name}
                         </p>
-                    </div>
-                    <div className='mt-1 flex text-sm'>
                         <p className='text-gray-500'>
                             {/* details */}
                             {data.Category.name}
                         </p>
                     </div>
-                    <Currency value={data.price} />
+                    <div className='mt-1 flex text-sm'>
+                        <div className='flex border h-min gap-x-4 justify-center items-center p-1 rounded-md'>
+                            <Minus size={15} className=' cursor-pointer' onClick={() => cart.removeItem(data.id)} />
+                            {data.quantity}
+                            <Plus size={15} className=' cursor-pointer' onClick={() => cart.addSame(data.id)} />
+                        </div>
+                    </div>
+                    <div className='flex justify-center'>
+                        <Currency value={data.price} />
+                    </div>
                 </div>
             </div>
         </li>

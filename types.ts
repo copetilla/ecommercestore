@@ -4,6 +4,16 @@ export interface Billboard {
     imageUrl: string
 }
 
+export interface Settings {
+    id: string;
+    billboardId: string;
+    name: string;
+    userId: string;
+    nameSINPE: string;
+    numberSINPE: string;
+}
+
+
 export interface Category {
     id: string;
     name: string;
