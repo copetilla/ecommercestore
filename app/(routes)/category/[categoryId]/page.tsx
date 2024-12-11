@@ -16,7 +16,7 @@ interface CategoryPageProps {
     }
 }
 
-const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
+const CategoryPage = async ({ params }: CategoryPageProps) => {
     const products = await getProducts({ categoryId: params.categoryId, isArchived: false })
     const category = await getCategory(params.categoryId)
     return (
