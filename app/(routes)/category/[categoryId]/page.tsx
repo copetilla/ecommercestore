@@ -10,9 +10,10 @@ import MobileFilters from './components/mobile-filter';
 
 export const revalidate = 0;
 
-const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
-    const products = await getProducts({ categoryId: params.categoryId, isArchived: false })
-    const category = await getCategory(params.categoryId)
+const CategoryPage = async ({ params }: { params: Promise<{ categoryId: string }> }) => {
+    const categoryId = (await params).categoryId
+    const products = await getProducts({ categoryId: categoryId, isArchived: false })
+    const category = await getCategory(categoryId)
     return (
         <div className='bg-white'>
             <Container>
