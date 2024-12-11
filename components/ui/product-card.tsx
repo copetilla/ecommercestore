@@ -64,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                     {data.name}
                 </p>
                 <p className='text-gray-500 text-sm'>
-                    {data.Category?.label}
+                    {data.Category?.name}
                 </p>
             </div>
             {/* price */}
