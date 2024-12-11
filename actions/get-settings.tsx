@@ -1,6 +1,6 @@
 import { Settings } from "@/types";
 
-const URL = `${process.env.NEXT_PUBLIC_API_URL_STORES}/fb33dab5-98be-4a19-a637-eb32363bf50f`
+const URL = `${process.env.NEXT_PUBLIC_API_URL_STORES}/15812c1b-dc74-4ae2-b9c0-4998e2ba2a64`
 
 const getSettings = async (): Promise<Settings> => {
 
